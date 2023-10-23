@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class PangramChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String input = scanner.nextLine();
+
+        boolean isPangram = checkPangram(input);
+
+        if (isPangram) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+
+    public static boolean checkPangram(String sentence) {
+        boolean[] mark = new boolean[26];
+        int index;
+        int length = sentence.length();
+
+        for (int i = 0; i < length; i++) {
+            char c = sentence.charAt(i);
+            if ('A' <= c && c <= 'Z') {
+                index = c - 'A';
+            } else if ('a' <= c && c <= 'z') {
+                index = c - 'a';
+            } else {
+                continue; 
+            }
+            mark[index] = true;
+        }
+
+       
+        for (int i = 0; i < 26; i++) {
+            if (!mark[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
